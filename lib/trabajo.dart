@@ -23,7 +23,7 @@ class Trabajo extends StatelessWidget {
             width: 360,
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: const Color.fromARGB(255, 9, 203, 148),
+              color: const Color.fromARGB(255, 183, 0, 0),
               borderRadius: BorderRadius.circular(20),
             ),
 
