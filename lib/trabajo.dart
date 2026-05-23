@@ -20,11 +20,12 @@ class Trabajo extends StatelessWidget {
         ),
         body: Center(
           child: Container(
-            width: 360,
+            width: 380,
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
               color: const Color.fromARGB(255, 183, 0, 0),
               borderRadius: BorderRadius.circular(20),
+              border: Border.all(color: const Color.fromARGB(255, 0, 0, 0), width: 2), // Agregar borde
             ),
 
             child: Row(
@@ -33,7 +34,8 @@ class Trabajo extends StatelessWidget {
 
                 const Icon(
                   Icons.person,
-                  color: Colors.white,
+                  
+                  color: Color.fromARGB(255, 0, 0, 0),
                   size: 100,
                 ),
 
@@ -57,7 +59,7 @@ class Trabajo extends StatelessWidget {
                       children: const [
                         Icon(
                           Icons.email,
-                          color: Colors.white,
+                          color: Color.fromARGB(255, 0, 0, 0),
                           size: 15,
                         ),
                         SizedBox(width: 10),
@@ -77,7 +79,7 @@ class Trabajo extends StatelessWidget {
                       children: const [
                         Icon(
                           Icons.phone,
-                          color: Colors.white,
+                          color: Color.fromARGB(255, 0, 0, 0),
                           size: 15,
                         ),
                         SizedBox(width: 10),
@@ -95,7 +97,7 @@ class Trabajo extends StatelessWidget {
                       children: const [
                         Icon(
                           Icons.location_on,
-                          color: Colors.white,
+                          color: Color.fromARGB(255, 0, 0, 0),
                           size: 15,
                         ),
                         SizedBox(width: 10),
