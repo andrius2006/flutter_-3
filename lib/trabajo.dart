@@ -9,6 +9,7 @@ class Trabajo extends StatelessWidget {
     return MaterialApp(
       title: "Flutter Demo",
       debugShowCheckedModeBanner: false,
+      
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
           seedColor: Colors.white,
@@ -16,7 +17,7 @@ class Trabajo extends StatelessWidget {
       ),
       home: Scaffold(
         appBar: AppBar(
-          title: const Text("Tarjeta información"),
+          title: const Text("Tarjeta de presentación"),
         ),
         body: Center(
           child: Container(
