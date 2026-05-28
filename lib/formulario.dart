@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 class MyApp extends StatelessWidget {
@@ -41,6 +42,8 @@ class _FormularioState extends State<Formulario> {
   // Variable del sistema
   String rol = "Usuario";
   DateTime? fechaNacimiento;
+  bool aceptaTerminos = false;
+  bool notificaciones = false;
 
   @override
   Widget build(BuildContext context) {
@@ -85,6 +88,13 @@ class _FormularioState extends State<Formulario> {
                   border: OutlineInputBorder(),
                   prefixIcon: Icon(Icons.person),
                 ),
+
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return "Por favor, ingrese tu nombre";
+                  }
+                  return null;
+                },
               ),
 
               const SizedBox(height: 20),
@@ -99,6 +109,15 @@ class _FormularioState extends State<Formulario> {
                   border: OutlineInputBorder(),
                   prefixIcon: Icon(Icons.email),
                 ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return "Por favor, ingrese tu correo electrónico";
+                  }
+                  if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
+                    return "Por favor, ingrese un correo electrónico válido";
+                  }
+                  return null;
+                },
               ),
 
               const SizedBox(height: 20),
@@ -107,12 +126,27 @@ class _FormularioState extends State<Formulario> {
               TextFormField(
                 controller: phoneController,
                 keyboardType: TextInputType.phone,
+                inputFormatters: [
+                  // Filtrar solo números
+                  FilteringTextInputFormatter.digitsOnly,
+                ],
 
                 decoration: const InputDecoration(
                   labelText: "Número de teléfono",
                   border: OutlineInputBorder(),
                   prefixIcon: Icon(Icons.phone),
                 ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return "Por favor, ingrese tu número de teléfono";
+                  }
+                  if (value.length < 7) {
+                    return "El número de teléfono debe tener al menos 7 dígitos";
+                  }
+                  return null;
+                },
+                
+
               ),
 
               const SizedBox(height: 20),
@@ -127,6 +161,15 @@ class _FormularioState extends State<Formulario> {
                   border: OutlineInputBorder(),
                   prefixIcon: Icon(Icons.lock),
                 ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return "Por favor, ingrese una contraseña";
+                  }
+                  if (value.length < 6) {
+                    return "La contraseña debe tener al menos 6 caracteres";
+                  }
+                  return null;
+                },
               ),
 
               const SizedBox(height: 20),
@@ -193,6 +236,49 @@ class _FormularioState extends State<Formulario> {
                       });
                     }
                   },
+                ),
+              ),
+              const SizedBox(height: 20),
+              CheckboxListTile(
+                title: const Text("Acepto los términos y condiciones"),
+                value: aceptaTerminos,
+                onChanged: (value) {
+                  setState(() {
+                    aceptaTerminos = value!;
+                  });
+                },
+              ),
+              const SizedBox(height: 10),
+              //switch para recibir notificaciones
+              SwitchListTile(
+                title: const Text("Recibir notificaciones"),
+                value: notificaciones,
+                onChanged: (value) {
+                  setState(() {
+                    notificaciones = value;
+                  });
+                },
+              ),
+
+              const SizedBox(height: 30),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    // Validar el formulario 
+                    if (formKey.currentState!.validate()&& aceptaTerminos) {
+                      print("formulario válido, procesar datos...");
+                      print("Nombre: ${nameController.text}");
+                      print("Correo: ${emailController.text}");
+                      print("Teléfono: ${phoneController.text}");
+                      print("Contraseña: ${passwordController.text}");
+                    }
+
+                    else {
+                      print("por favor, complete el formulario y acepte los términos.");
+                    }
+                  },
+                  child: const Text("Registar"),
                 ),
               ),
             ],
